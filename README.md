@@ -19,7 +19,7 @@ A mod that implements rules from the scenario Rise of the Reich (https://docs.go
 
 - events/HolyRomanEmpire.txt
 	- Added event if the emperor is not a GP, the capitol gets 50 dev in all three areas respectively but gets a province modifier that nulls the effects of this increase
-	- Added event if the emperor is not a GP 
+	- Added event if the emperor was removed from power the buffs from previous event is removed along with the modifier
 
 - localisation/generic_events_l_english.yml
 	- Added text for events in HolyRomanEmpire.txt
