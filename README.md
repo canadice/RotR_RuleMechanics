@@ -1,6 +1,6 @@
-###############################################################
-########### Rise of the Reich - Rule Mechanics ################
-###############################################################
+# Rise of the Reich - Rule Mechanics 
+A mod that implements rules from the scenario Rise of the Reich (https://docs.google.com/spreadsheets/d/17s7Zuz-TFOdlr2j4wlsbmydyqkxg9f0XNYB7IclYdu4/edit#gid=254942968)
+
 
 ## Changes in the mod files
 - common/defines.lua
@@ -34,5 +34,5 @@ Change take_claim to allow for different AE based on if its claim or core
 
 ## Defunct changes
 - common/triggered_modifiers/00_triggered_modifiers.txt
-Added a triggered modifier if the emperor is not a GP, it will be seen as such
+	- Added a triggered modifier if the emperor is not a GP, it will be seen as such
 
