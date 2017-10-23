@@ -18,7 +18,7 @@ country_event = {
 	}
 
 	immediate = {
-		set_country_flag = hre_emperor_great_power
+		set_country_flag = hre_emperor_great_power #To keep track of info events
 	}
 
 	option = {
@@ -44,27 +44,33 @@ country_event = {
 # Clears flag for new emperor
 country_event = {
 	id = 10001
-	title = "EVTNAME5073"
-	desc = "EVTDESC5073"
+	title = "EVTNAME10001"
+	desc = "EVTDESC10001"
 	picture = CITY_DEVELOPMENT_eventPicture
 
-	hidden = yes
-	
 	trigger = {
 		AND = {
 			is_emperor = no
-			great_power_rank = 10
 			has_country_flag = hre_emperor_great_power
 		}
 	}
 
 	immediate = {
-		clr_country_flag = hre_emperor_great_power
+		clr_country_flag = hre_emperor_great_power #To keep track of info events
 	}
 
 	option = {
-		name = "EVTOPTA5073"		# Increase tax income.
-		#add_base_tax = 1
+		name = "EVTOPT10001"		# Increase tax income.
+
+		capital_scope = {
+			add_base_tax = -50
+			add_base_production = -50
+			add_base_manpower = -50
+			
+			remove_province_modifier = {
+				name = "hre_emperor_great_power"
+			}
+		}
 	}
 }
 
