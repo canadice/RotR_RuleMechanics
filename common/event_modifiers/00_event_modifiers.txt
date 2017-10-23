@@ -20,7 +20,7 @@ hre_emperor_great_power = {
 	local_missionary_strength = 15
 	supply_limit_modifier = -3
 	allowed_num_of_buildings = -15
-	local_development_cost = -42
+	local_development_cost = -41
 	land_forcelimit = -15
 	
 	# Other
