@@ -1,6 +1,9 @@
 # Rise of the Reich - Rule Mechanics 
 A mod that implements rules from the scenario Rise of the Reich (https://docs.google.com/spreadsheets/d/17s7Zuz-TFOdlr2j4wlsbmydyqkxg9f0XNYB7IclYdu4/edit#gid=254942968)
 
+## Download instructions
+Download the repository as a zip-file and move it into the Paradox Interactive\Europa Universalis IV\mod folder. Extract **only** the .mod file from the zip-file.
+
 
 ## Changes in the mod files
 - common/defines.lua
