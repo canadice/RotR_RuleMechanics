@@ -23,8 +23,21 @@ country_event = {
 
 	option = {
 		name = "EVTOPT10000"		# Increase tax income.
-		#add_base_tax = 1
-		
+
+		capital_scope = {
+			add_base_tax = 50
+			add_base_production = 50
+			add_base_manpower = 50
+			
+			add_province_modifier = {
+				name = "hre_emperor_great_power"
+				duration = -1
+			}
+		}
+	
+			
+
+		}
 	}
 }
 
