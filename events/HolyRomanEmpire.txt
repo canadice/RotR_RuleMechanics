@@ -41,7 +41,7 @@ country_event = {
 	}
 }
 
-# Clears flag for new emperor
+# Clears flag and improvements for old emperor
 country_event = {
 	id = 10001
 	title = "EVTNAME10001"
