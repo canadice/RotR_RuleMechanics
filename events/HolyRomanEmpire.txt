@@ -63,9 +63,7 @@ country_event = {
 			add_base_production = -50
 			add_base_manpower = -50
 			
-			remove_province_modifier = {
-				name = "hre_emperor_great_power"
-			}
+			remove_province_modifier = hre_emperor_great_power
 		}
 	}
 }
