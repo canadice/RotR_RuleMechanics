@@ -2,7 +2,7 @@
 
 namespace = hre_event
 
-# Emperor as a Great Power
+# Adds development to the Imperial Palace if the nation is not a Great Power
 country_event = {
 	id = 10000
 	title = "EVTNAME10000"
@@ -14,6 +14,9 @@ country_event = {
 			is_emperor = yes
 			great_power_rank = 10
 			NOT = { has_country_flag = hre_emperor_great_power }
+			4268 = {
+				 owned_by = ROOT
+			}
 		}
 	}
 
@@ -24,20 +27,75 @@ country_event = {
 	option = {
 		name = "EVTOPT10000"		# Increase tax income.
 
-		capital_scope = {
-			add_base_tax = 50
-			add_base_production = 50
-			add_base_manpower = 50
-			
-			add_province_modifier = {
-				name = "hre_emperor_great_power"
-				duration = -1
-			}
-		}
+		province_event = {id = 10000.a}
 	}
 }
 
-# Clears flag and improvements for old emperor
+# Counter to increase virtual dev to GP 9
+province_event = {
+	id = 10000.a
+	title = "EVTNAME10000.a"
+	desc = "EVTDESC10000.a"
+	picture = CITY_DEVELOPMENT_eventPicture
+	
+	hidden = yes
+	
+	trigger = {
+		AND = {
+			is_emperor = yes
+			great_power_rank = 10
+			4268 = {
+				 owned_by = ROOT
+			}
+		}
+	}
+	
+	option = {
+		name = "EVTOPT10000.a"
+		4268 = {
+			add_base_tax = 10
+		}
+		
+		province_event = {id = 10000.a}
+	}
+}
+
+# Counter to decrease virtual dev to GP 9
+province_event = {
+	id = 10000.b
+	title = "EVTNAME10000.b"
+	desc = "EVTDESC10000.b"
+	picture = CITY_DEVELOPMENT_eventPicture
+	
+	hidden = yes
+	
+	trigger = {
+		AND = {
+			is_emperor = yes
+			NOT = {great_power_rank = 10}
+			4268 = {
+				AND = {
+					owned_by = ROOT
+					NOT = {base_tax = 1}
+				}
+				
+			}
+		}
+	}
+	
+	option = {
+		name = "EVTOPT10000.b"
+		
+		4268 = {
+			add_base_tax = -10
+		}
+	
+		province_event = {id = 10000.b}
+	}
+}
+
+
+# Clears flag for old emperor
 country_event = {
 	id = 10001
 	title = "EVTNAME10001"
@@ -58,15 +116,116 @@ country_event = {
 	option = {
 		name = "EVTOPT10001"		# Increase tax income.
 
-		capital_scope = {
-			add_base_tax = -50
-			add_base_production = -50
-			add_base_manpower = -50
-			
-			remove_province_modifier = hre_emperor_great_power
-		}
 	}
 }
+
+# Grants power over the Imperial Palace
+country_event = {
+	id = 10002
+	title = "EVTNAME10002"
+	desc = "EVTDESC10002"
+	picture = CITY_DEVELOPMENT_eventPicture
+
+	trigger = {
+		AND = {
+			is_emperor = yes
+			NOT = { has_country_flag = hre_emperor_imperial_palace }
+		}
+	}
+
+	immediate = {
+		set_country_flag = hre_emperor_imperial_palace #To keep track of info events
+	}
+
+	option = {
+		name = "EVTOPT10002"		# Increase tax income.
+
+		4268 = {
+			cede_province = ROOT
+		}
+		add_core = 4268
+		
+		province_event = { id = 10004 }
+	}
+}
+
+# Old emperor loses the Imperial Palace
+country_event = {
+	id = 10003
+	title = "EVTNAME10003"
+	desc = "EVTDESC10003"
+	picture = CITY_DEVELOPMENT_eventPicture
+
+	trigger = {
+		AND = {
+			is_emperor = no
+			has_country_flag = hre_emperor_imperial_palace
+		}
+	}
+
+	immediate = {
+		clr_country_flag = hre_emperor_imperial_palace #To keep track of info events
+	}
+
+	option = {
+		name = "EVTOPT10003"	
+
+		remove_core = 4268
+	}
+}
+
+# Adds modifier to negate all development values in the Imperial Palace (4268)
+province_event = {
+	id = 10004
+	title = "EVTNAME950"
+	desc = "EVTDESC950"
+	picture = HRE_eventPicture
+	
+	hidden = yes
+	
+	is_triggered_only = yes
+	
+	trigger ={
+		4268 = {
+			NOT = {has_province_modifier = hre_emperor_imperial_palace}
+		}
+		
+	}
+		
+	option = {
+		4268 = {
+			add_province_modifier = {
+				name = "hre_emperor_imperial_palace"
+				duration = -1
+			}
+		}		
+	}
+}
+
+# Removes cardinal from this province as the dev is "imaginary"
+province_event = {
+	id = 10005
+	title = "EVTNAME950"
+	desc = "EVTDESC950"
+	picture = HRE_eventPicture
+	
+	hidden = yes
+	
+	trigger ={
+		4268 = {
+			has_cardinal = yes
+		}
+		
+	}
+	
+	
+	option = {
+		4268 = {
+			remove_cardinal = yes
+		}		
+	}
+}
+
 
 
 

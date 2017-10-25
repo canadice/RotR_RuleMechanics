@@ -2,29 +2,30 @@
 # scriptable and usable for event-system below.
 ##################################################################################################
 
-hre_emperor_great_power = {
+hre_emperor_imperial_palace = {
+	local_autonomy = 1000
+	
+	min_local_autonomy = 1000
+	
 	# Base Tax	
-	regiment_recruit_speed = 0.5
-	tax_income = -50
+	#regiment_recruit_speed = 0.5
+	#tax_income = -200
 	
 	# Base Production
-	trade_goods_size = -10
-	ship_recruit_speed = 0.5
-	
+	trade_goods_size = -200
+		
 	# Base Manpower
-	local_manpower = -12.5
-	garrison_growth = -0.5
-	
+	local_manpower = -10000
+		
 	# Development
-	province_trade_power_value = -30
-	local_missionary_strength = 15
-	supply_limit_modifier = -3
-	allowed_num_of_buildings = -15
-	local_development_cost = -41
-	land_forcelimit = -15
+	#province_trade_power_value = -1000
+	#local_missionary_strength = 15
+	#allowed_num_of_buildings = -100
+	local_development_cost = 100000
+	#land_forcelimit = -300
 	
 	# Other
-	local_institution_spread = -0.15
+	local_institution_spread = 100000
 }
 
 
