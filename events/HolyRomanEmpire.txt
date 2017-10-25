@@ -7,7 +7,7 @@ country_event = {
 	id = 10000
 	title = "EVTNAME10000"
 	desc = "EVTDESC10000"
-	picture = CITY_DEVELOPMENT_eventPicture
+	picture = CITY_VIEW_eventPicture
 
 	trigger = {
 		AND = {
@@ -124,7 +124,7 @@ country_event = {
 	id = 10002
 	title = "EVTNAME10002"
 	desc = "EVTDESC10002"
-	picture = CITY_DEVELOPMENT_eventPicture
+	picture = COURT_eventPicture
 
 	trigger = {
 		AND = {
