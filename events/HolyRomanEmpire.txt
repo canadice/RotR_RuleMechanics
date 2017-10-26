@@ -41,11 +41,12 @@ province_event = {
 	hidden = yes
 	
 	trigger = {
-		AND = {
-			is_emperor = yes
-			great_power_rank = 10
-			4268 = {
-				 owned_by = ROOT
+		4268 = {
+			owner = {
+				AND = {
+					is_emperor = yes
+					great_power_rank = 10
+				}
 			}
 		}
 	}
@@ -69,17 +70,14 @@ province_event = {
 	
 	hidden = yes
 	
-	trigger = {
-		AND = {
-			is_emperor = yes
-			NOT = {great_power_rank = 10}
-			4268 = {
+		4268 = {
+			owner = {
 				AND = {
-					owned_by = ROOT
-					NOT = {base_tax = 1}
+					is_emperor = yes
+					NOT = {great_power_rank = 10}
 				}
-				
 			}
+			NOT = {base_tax = 1}
 		}
 	}
 	
