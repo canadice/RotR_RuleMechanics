@@ -1,7 +1,10 @@
 
 
 namespace = hre_event
+		
 
+
+# The Emperor must be seen as a Great Power
 # Adds development to the Imperial Palace if the nation is not a Great Power
 country_event = {
 	id = 10000
@@ -27,10 +30,123 @@ country_event = {
 	option = {
 		name = "EVTOPT10000"		# Increase tax income.
 
-		province_event = {id = 10007}
+		4268 = {
+			add_base_tax = developmentVar_diff
+		}
+		
+		province_event = { id = 10007 }
 	}
 }
 
+# Sets the dev value of the 9th Great Power to a variable
+country_event = {
+	id = 10008
+	title = "EVTNAME10008"
+	desc = "EVTDESC10008"
+	picture = CITY_DEVELOPMENT_eventPicture
+	
+	hidden = yes
+	
+	trigger = {
+		AND = {
+			great_power_rank = 9
+			NOT = { great_power_rank = 10 }
+			NOT = { has_country_flag = 9th_great_power }
+		}
+	}
+	
+	immediate = {
+		set_country_flag = 9th_great_power #To keep track of info events
+	}
+
+	# Works as to put the values of the current nations development as a variable
+	# Find a way to use this variable as an addition to the base_tax in Imperial Palace
+	option = {
+		name = "EVTOPT10008"
+		
+		export_to_variable = {
+			which = developmentVar_9gp
+			value = states_development
+			who = ROOT
+		}
+		
+		emperor = {
+			export_to_variable = {
+				which = developmentVar_emp
+				value = states_development
+			}
+		}
+		
+		# The following code does not work, second which becomes 0 maybe because of checking in the same event?
+		set_variable =  { which = developmentVar_diff which = developmentVar_9gp }
+		subtract_variable = { which = developmentVar_diff which = developmentVar_emp }
+
+	}
+	
+}
+
+# Sets if nation moves away from 9th GP status flag is cleared
+country_event = {
+	id = 10009
+	title = "EVTNAME10009"
+	desc = "EVTDESC10009"
+	picture = CITY_DEVELOPMENT_eventPicture
+	
+	hidden = yes
+	
+	trigger = {
+		AND = {
+			has_country_flag = 9th_great_power
+			
+			OR = {
+				NOT = {great_power_rank = 9}
+				great_power_rank = 10
+			}
+			
+		}
+	}
+	
+	immediate = {
+		clr_country_flag = 9th_great_power #To keep track of info events
+	}
+	
+	option = {
+		name = "EVTOPT10009"
+	}
+	
+}
+
+country_event = {
+	id = 10010
+	title = "EVTNAME10010"
+	desc = "EVTDESC10010"
+	picture = CITY_DEVELOPMENT_eventPicture
+	
+	hidden = yes
+	
+	trigger = {
+		AND = {
+			has_country_flag = 9th_great_power
+			
+			OR = {
+				NOT = {great_power_rank = 9}
+				great_power_rank = 10
+			}
+			
+		}
+	}
+	
+	immediate = {
+		clr_country_flag = 9th_great_power #To keep track of info events
+	}
+	
+	option = {
+		name = "EVTOPT10009"
+	}
+	
+}
+
+# Let's make the Emperor proud
 # Counter to increase virtual dev to GP 9
 province_event = {
 	id = 10007
@@ -40,25 +156,41 @@ province_event = {
 	
 	hidden = yes
 	
+	# Need to find a way to limit the dev increase as the GP status only get updated once a month
+	# Find a way to calculate and use the 9th power development.
+		
 	trigger = {
-		4268 = {
-			owner = {
-				AND = {
-					is_emperor = yes
-					great_power_rank = 10
+		AND = {
+			4268 = {
+				owner = {
+					AND = {
+						is_emperor = yes
+						great_power_rank = 10
+					}
 				}
 			}
+			
+			check_variable = { which = developmentVar_diff value = 1 }
 		}
 	}
 	
 	option = {
 		name = "EVTOPT10007"
 		4268 = {
-			add_base_tax = 10
+			while = {
+				limit = {
+					check_variable = { which = developmentVar_diff value = 1 }
+				}
+				
+				subtract_variable = {which = developmentVar_diff value = 1 }
+				
+				add_base_tax = 1
+			}
 		}
 	}
 }
 
+# The Emperor has grown too much.
 # Counter to decrease virtual dev to GP 9
 province_event = {
 	id = 10006
@@ -66,16 +198,25 @@ province_event = {
 	desc = "EVTDESC10006"
 	picture = CITY_DEVELOPMENT_eventPicture
 	
+	# Current fix
+	is_triggered_only = yes
+	
 	hidden = yes
 	
-		4268 = {
-			owner = {
+	trigger = {
+		AND = {
+			4268 = {
 				AND = {
-					is_emperor = yes
-					NOT = {great_power_rank = 10}
+					owner = {
+						AND = {
+							is_emperor = yes
+							NOT = { great_power_rank = 10 }
+						}
+					}
+					NOT = { base_tax = 1 }
 				}
 			}
-			NOT = {base_tax = 1}
+		NOT = { check_variable = { which = developmentVar_diff value = 1 } }
 		}
 	}
 	
@@ -83,12 +224,25 @@ province_event = {
 		name = "EVTOPT10006"
 		
 		4268 = {
-			add_base_tax = -10
+			while = {
+				limit = {
+					AND = {
+						NOT = { check_variable = { which = developmentVar_diff value = 1 } }
+						NOT = { base_tax = 1 }
+					}
+					
+				}
+				
+			subtract_variable = {which = developmentVar_diff value = -1 }
+			
+			add_base_tax = -1
+			}
 		}
+		
 	}
 }
 
-
+# Change of Emperor
 # Clears flag for old emperor
 country_event = {
 	id = 10001
@@ -113,6 +267,7 @@ country_event = {
 	}
 }
 
+# The Emperor moves to the Imperial Palace
 # Grants power over the Imperial Palace
 country_event = {
 	id = 10002
@@ -143,6 +298,7 @@ country_event = {
 	}
 }
 
+# The Old Emperor must move out
 # Old emperor loses the Imperial Palace
 country_event = {
 	id = 10003
@@ -168,11 +324,12 @@ country_event = {
 	}
 }
 
+# The aura of the Palace
 # Adds modifier to negate all development values in the Imperial Palace (4268)
 province_event = {
 	id = 10004
-	title = "EVTNAME950"
-	desc = "EVTDESC950"
+	title = "EVTNAME10004"
+	desc = "EVTDESC10004"
 	picture = HRE_eventPicture
 	
 	hidden = yes
