@@ -27,15 +27,15 @@ country_event = {
 	option = {
 		name = "EVTOPT10000"		# Increase tax income.
 
-		province_event = {id = 10000.a}
+		province_event = {id = 10007}
 	}
 }
 
 # Counter to increase virtual dev to GP 9
 province_event = {
-	id = 10000.a
-	title = "EVTNAME10000.a"
-	desc = "EVTDESC10000.a"
+	id = 10007
+	title = "EVTNAME10007"
+	desc = "EVTDESC10007"
 	picture = CITY_DEVELOPMENT_eventPicture
 	
 	hidden = yes
@@ -52,20 +52,18 @@ province_event = {
 	}
 	
 	option = {
-		name = "EVTOPT10000.a"
+		name = "EVTOPT10007"
 		4268 = {
 			add_base_tax = 10
 		}
-		
-		province_event = {id = 10000.a}
 	}
 }
 
 # Counter to decrease virtual dev to GP 9
 province_event = {
-	id = 10000.b
-	title = "EVTNAME10000.b"
-	desc = "EVTDESC10000.b"
+	id = 10006
+	title = "EVTNAME10006"
+	desc = "EVTDESC10006"
 	picture = CITY_DEVELOPMENT_eventPicture
 	
 	hidden = yes
@@ -82,13 +80,11 @@ province_event = {
 	}
 	
 	option = {
-		name = "EVTOPT10000.b"
+		name = "EVTOPT10006"
 		
 		4268 = {
 			add_base_tax = -10
 		}
-	
-		province_event = {id = 10000.b}
 	}
 }
 
