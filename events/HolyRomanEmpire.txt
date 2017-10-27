@@ -60,10 +60,10 @@ country_event = {
 	}
 
 	# Works as to put the values of the current nations development as a variable
-	# Find a way to use this variable as an addition to the base_tax in Imperial Palace
 	option = {
 		name = "EVTOPT10008"
 		
+		# Need to export the values to the Province Scope of where the values are going to be used.
 		4268 = { 
 			# Exports development value of own 9th GP country
 			export_to_variable = {
@@ -97,11 +97,10 @@ country_event = {
 	is_triggered_only = yes
 	
 	# Works as to put the values of the current nations development as a variable
-	# Find a way to use this variable as an addition to the base_tax in Imperial Palace
 	option = {
 		name = "EVTOPT10008"
 		
-		# The following code does not work, second which becomes 0 maybe because of checking in the same event?
+		# Need to export the values to the Province Scope of where the values are going to be used.
 		4268 = {
 			set_variable =  { which = developmentVar_diff which = developmentVar_9gp }
 			subtract_variable = { which = developmentVar_diff which = developmentVar_emp }
@@ -162,7 +161,7 @@ province_event = {
 						great_power_rank = 10
 					}
 				}
-				check_variable = { which = developmentVar_diff value = 1 }
+				check_variable = { which = developmentVar_diff value = 0 }
 			}
 		}
 	}
@@ -172,7 +171,7 @@ province_event = {
 		4268 = {
 			while = {
 				limit = {
-					check_variable = { which = developmentVar_diff value = 1 }
+					check_variable = { which = developmentVar_diff value = 0 }
 				}
 				
 				subtract_variable = { which = developmentVar_diff value = 1 }
@@ -206,7 +205,7 @@ province_event = {
 					}
 				}
 				NOT = { base_tax = 1 }
-				NOT = { check_variable = { which = developmentVar_diff value = 1 } }
+				NOT = { check_variable = { which = developmentVar_diff value = 0 } }
 			}
 		}
 	}
@@ -218,7 +217,7 @@ province_event = {
 			while = {
 				limit = {
 					AND = {
-						NOT = { check_variable = { which = developmentVar_diff value = 1 } }
+						NOT = { check_variable = { which = developmentVar_diff value = 0 } }
 						NOT = { base_tax = 1 }
 					}
 					
@@ -254,7 +253,7 @@ country_event = {
 
 	option = {
 		name = "EVTOPT10001"		# Increase tax income.
-
+		
 	}
 }
 
@@ -286,6 +285,9 @@ country_event = {
 		add_core = 4268
 		
 		province_event = { id = 10004 }
+		
+		# Trying to trigger a recaulculation of the dev difference when a new emperor is voted in.
+		country_event = {id = 10008}
 	}
 }
 
