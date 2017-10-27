@@ -89,6 +89,22 @@ country_event = {
 			}
 		}
 		
+		emperor ={
+			every_subject_country = {
+				4268 ={
+					export_to_variable = {
+						which = developmentVar_subj_emp
+						value = states_development
+						who = PREV
+					}
+					divide_variable = { which = developmentVar_subj_emp value = 2 }
+					
+					change_variable = { which = developmentVar_emp which = developmentVar_subj_emp }
+				}
+			
+			}
+		}
+		
 		
 		province_event = { id = 10011 }
 
