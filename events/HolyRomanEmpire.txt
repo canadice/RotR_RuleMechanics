@@ -29,12 +29,6 @@ country_event = {
 
 	option = {
 		name = "EVTOPT10000"		# Increase tax income.
-
-		4268 = {
-			add_base_tax = developmentVar_diff
-		}
-		
-		province_event = { id = 10007 }
 	}
 }
 
@@ -79,6 +73,22 @@ country_event = {
 			}
 		}
 		
+		ROOT ={
+			every_subject_country = {
+				4268 ={
+					export_to_variable = {
+						which = developmentVar_subj
+						value = states_development
+						who = PREV
+					}
+					divide_variable = { which = developmentVar_subj value = 2 }
+					
+					change_variable = { which = developmentVar_9gp which = developmentVar_subj }
+				}
+			
+			}
+		}
+		
 		
 		province_event = { id = 10011 }
 
@@ -104,6 +114,22 @@ country_event = {
 		4268 = {
 			set_variable =  { which = developmentVar_diff which = developmentVar_9gp }
 			subtract_variable = { which = developmentVar_diff which = developmentVar_emp }
+			
+			if = {
+				limit = {
+					check_variable = { which = developmentVar_diff value = 0 }
+				}
+					
+				province_event = { id = 10007}
+			}
+			
+			if = {
+				limit = {
+					NOT = { check_variable = { which = developmentVar_diff value = 0 } }
+				}
+					
+				province_event = { id = 10006}
+			}
 		}
 	}
 }
@@ -190,9 +216,6 @@ province_event = {
 	desc = "EVTDESC10006"
 	picture = CITY_DEVELOPMENT_eventPicture
 	
-	# Current fix
-	is_triggered_only = yes
-	
 	hidden = yes
 	
 	trigger = {
@@ -204,7 +227,7 @@ province_event = {
 						NOT = { great_power_rank = 10 }
 					}
 				}
-				NOT = { base_tax = 1 }
+				base_tax = 1
 				NOT = { check_variable = { which = developmentVar_diff value = 0 } }
 			}
 		}
@@ -218,7 +241,7 @@ province_event = {
 				limit = {
 					AND = {
 						NOT = { check_variable = { which = developmentVar_diff value = 0 } }
-						NOT = { base_tax = 1 }
+						base_tax = 1
 					}
 					
 				}
